@@ -9,8 +9,6 @@ namespace ConsoleApp1
             string[,] Matriz = new string[3, 3];
             string Jogador1 = "X";
             string Jogador2 = "O";
-            int Linha;
-            int Coluna;
             int contador = 0;
             bool situacaoJogo = true;
 
@@ -44,7 +42,6 @@ namespace ConsoleApp1
 
         static void Inserir(string jogador, string[,] Matriz)
         {
-
             int[] vet = new int[2];
 
             /*
@@ -55,24 +52,42 @@ namespace ConsoleApp1
 
             int Linha;
             int Coluna;
-            Console.Write("Digite a linha: ");
-            Linha = int.Parse(Console.ReadLine());
-            Console.Write("Digite a Coluna: ");
-            Coluna = int.Parse(Console.ReadLine());
 
-
-            for (int l = 0; l < Matriz.Length; l++)
+            bool Ocupado = true;
+            do
             {
-                for (int c = 0; c < Matriz.Length; c++)
+                Console.Write("Digite a linha: ");
+                Linha = int.Parse(Console.ReadLine());
+                Console.Write("Digite a Coluna: ");
+                Coluna = int.Parse(Console.ReadLine());
+
+                Ocupado = VerificaPos((Linha - 1), (Coluna - 1), Matriz);
+                
+                for (int l = 0; l < Matriz.Length; l++)
                 {
-                    if (l == vet[0] && c == vet[1])
+                    for (int c = 0; c < Matriz.Length; c++)
                     {
-                        Matriz[vet[0] - 1, vet[1] - 1] = jogador;
+                        if (!Ocupado && l == vet[0] && c == vet[1])
+                        {
+                            Matriz[Linha - 1, Coluna - 1] = jogador;
+                        }
                     }
                 }
+            } while (Ocupado);
+        }
+        static bool VerificaPos(int linha, int coluna, string[,] Matriz)
+        {
+            if (Matriz[linha, coluna] == "-")
+            {
+                return false;
+            }
+            else
+            {
+                Console.WriteLine("Posição inválidia ou ocupada !");
+                Console.WriteLine();
+                return true;
             }
         }
-
         static void ImprimirJogo(string[,] Matriz)
         {
             for (int l = 0; l < Matriz.GetLength(0); l++)
@@ -84,6 +99,10 @@ namespace ConsoleApp1
                 }
                 Console.WriteLine();
             }
+        }
+        static void VerificaStatus(string [,] Matriz)
+        {
+
         }
     }
 }
