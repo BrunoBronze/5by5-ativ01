@@ -6,18 +6,18 @@ namespace ConsoleApp1
     {
         static void Main(string[] args)
         {
-            string[,] Matriz = new string[3, 3];
-            string Jogador1 = "X";
-            string Jogador2 = "O";
+            string[,] matriz = new string[3, 3];
+            string jogador1 = "X";
+            string jogador2 = "O";
             int contador = 0;
             bool situacaoJogo = true;
             int acabou;
 
-            for (int l = 0; l < Matriz.GetLength(0); l++)
+            for (int l = 0; l < matriz.GetLength(0); l++)
             {
-                for (int c = 0; c < Matriz.GetLength(1); c++)
+                for (int c = 0; c < matriz.GetLength(1); c++)
                 {
-                    Matriz[l, c] = "-";
+                    matriz[l, c] = "-";
                 }
             }
 
@@ -30,15 +30,15 @@ namespace ConsoleApp1
             {
                 if (contador % 2 == 0)
                 {
-                    Inserir(Jogador1, Matriz, nome1);
-                    ImprimirJogo(Matriz);
-                    acabou = VerificaStatus(Matriz, Jogador1);
+                    Inserir(matriz, jogador1, nome1);
+                    ImprimirJogo(matriz);
+                    acabou = VerificaStatus(matriz, jogador1);
                 }
                 else
                 {
-                    Inserir(Jogador2, Matriz, nome2);
-                    ImprimirJogo(Matriz);
-                    acabou = VerificaStatus(Matriz, Jogador1);
+                    Inserir(matriz, jogador2, nome2);
+                    ImprimirJogo(matriz);
+                    acabou = VerificaStatus(matriz, jogador2);
                 }
 
                 if (acabou == 0)
@@ -64,7 +64,7 @@ namespace ConsoleApp1
             Console.ReadKey();
         }
 
-        static void Inserir(string Jogador, string[,] Matriz, string nome)
+        static void Inserir(string[,] matriz, string jogador, string nome)
         {
             int linha;
             int coluna;
@@ -79,24 +79,24 @@ namespace ConsoleApp1
                 Console.Write("Digite a Coluna: ");
                 coluna = int.Parse(Console.ReadLine());
 
-                ocupado = VerificaPos((linha - 1), (coluna - 1), Matriz);
+                ocupado = VerificaPos((linha - 1), (coluna - 1), matriz);
 
-                for (int l = 0; l < Matriz.GetLength(0); l++)
+                for (int l = 0; l < matriz.GetLength(0); l++)
                 {
-                    for (int c = 0; c < Matriz.GetLength(1); c++)
+                    for (int c = 0; c < matriz.GetLength(1); c++)
                     {
                         if (!ocupado && l == linha && c == coluna)
                         {
-                            Matriz[linha - 1, coluna - 1] = Jogador;
+                            matriz[linha - 1, coluna - 1] = jogador;
                         }
                     }
                 }
             } while (ocupado);
         }
 
-        static bool VerificaPos(int linha, int coluna, string[,] Matriz)
+        static bool VerificaPos(int linha, int coluna, string[,] matriz)
         {
-            if (Matriz[linha, coluna] == "-")
+            if (matriz[linha, coluna] == "-")
             {
                 return false;
             }
@@ -108,20 +108,20 @@ namespace ConsoleApp1
             }
         }
 
-        static void ImprimirJogo(string[,] Matriz)
+        static void ImprimirJogo(string[,] matriz)
         {
-            for (int l = 0; l < Matriz.GetLength(0); l++)
+            for (int l = 0; l < matriz.GetLength(0); l++)
             {
                 Console.WriteLine("\t");
-                for (int c = 0; c < Matriz.GetLength(1); c++)
+                for (int c = 0; c < matriz.GetLength(1); c++)
                 {
                     if (c == 0)
                     {
-                        Console.Write("\t  " + Matriz[l, c]);
+                        Console.Write("\t  " + matriz[l, c]);
                     }
                     else
                     {
-                        Console.Write("  |  " + Matriz[l, c]);
+                        Console.Write("  |  " + matriz[l, c]);
                     }
                     
                 }
@@ -132,15 +132,14 @@ namespace ConsoleApp1
                 }
             }
         }
-        static int VerificaStatus(string[,] Matriz, string Jogador)
+        static int VerificaStatus(string[,] matriz, string jogador)
         {
-            
-            bool continuar = false;
+            int situacaoJogo;
             int diagonal1 = 0;
             int diagonal2 = 0;
+            bool continuar = false;
 
-            int situacaoJogo;
-            if (Jogador == "X")
+            if (jogador == "X")
             {
                 situacaoJogo = 1;
             }
@@ -150,12 +149,12 @@ namespace ConsoleApp1
             }
 
             //retorna ganhador coluna igual
-            for (int c = 0; c < Matriz.GetLength(1); c++)
+            for (int c = 0; c < matriz.GetLength(1); c++)
             {
                 int contador = 0;
-                for (int l = 0; l < Matriz.GetLength(0); l++)
+                for (int l = 0; l < matriz.GetLength(0); l++)
                 {
-                    if (Matriz[l, c] == Jogador)
+                    if (matriz[l, c] == jogador)
                     {
                         contador++;
                     }
@@ -166,12 +165,12 @@ namespace ConsoleApp1
                 }
             }
             //retorna ganhador linha igual
-            for (int l = 0; l < Matriz.GetLength(0); l++)
+            for (int l = 0; l < matriz.GetLength(0); l++)
             {
                 int contador = 0;
-                for (int c = 0; c < Matriz.GetLength(1); c++)
+                for (int c = 0; c < matriz.GetLength(1); c++)
                 {
-                    if (Matriz[l, c] == Jogador)
+                    if (matriz[l, c] == jogador)
                     {
                         contador++;
                     }
@@ -184,9 +183,9 @@ namespace ConsoleApp1
 
             //retorna ganhador diagonal principal
 
-            for (int l = 0; l < Matriz.GetLength(0); l++)
+            for (int l = 0; l < matriz.GetLength(0); l++)
             {
-                if (Matriz[l, l] == Jogador)
+                if (matriz[l, l] == jogador)
                 {
                     diagonal1++;
                 }
@@ -198,9 +197,9 @@ namespace ConsoleApp1
             }
 
             //retorna ganhador diagonal secundária
-            for (int l = 0, c = Matriz.GetLength(1)-1; l < Matriz.GetLength(0); l++, c--)
+            for (int l = 0, c = matriz.GetLength(1)-1; l < matriz.GetLength(0); l++, c--)
             {
-                if (Matriz[l, c] == Jogador)
+                if (matriz[l, c] == jogador)
                 {
                     diagonal2++;
                 }
@@ -212,11 +211,11 @@ namespace ConsoleApp1
             }
 
             //Verifica se há posições para continuar o jogo.
-            for (int l = 0; l < Matriz.GetLength(0); l++)
+            for (int l = 0; l < matriz.GetLength(0); l++)
             {
-                for (int c = 0; c < Matriz.GetLength(1); c++)
+                for (int c = 0; c < matriz.GetLength(1); c++)
                 {
-                    if (Matriz[l, c] == "-")
+                    if (matriz[l, c] == "-")
                     {
                         continuar = true;
                     }
