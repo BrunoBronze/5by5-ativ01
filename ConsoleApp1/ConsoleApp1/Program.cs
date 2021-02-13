@@ -21,17 +21,22 @@ namespace ConsoleApp1
                 }
             }
 
+            Console.Write("Digite o nome do primeiro jogador: ");
+            string nome1 = Console.ReadLine();
+            Console.Write("Digite o nome do segundo jogador: ");
+            string nome2 = Console.ReadLine();
+
             do
             {
                 if (contador % 2 == 0)
                 {
-                    Inserir(Jogador1, Matriz);
+                    Inserir(Jogador1, Matriz, nome1);
                     ImprimirJogo(Matriz);
                     acabou = VerificaStatus(Matriz, Jogador1);
                 }
                 else
                 {
-                    Inserir(Jogador2, Matriz);
+                    Inserir(Jogador2, Matriz, nome2);
                     ImprimirJogo(Matriz);
                     acabou = VerificaStatus(Matriz, Jogador1);
                 }
@@ -59,44 +64,36 @@ namespace ConsoleApp1
             Console.ReadKey();
         }
 
-        static void Inserir(string Jogador, string[,] Matriz)
+        static void Inserir(string Jogador, string[,] Matriz, string nome)
         {
-            int Linha;
-            int Coluna;
-            int jogador;
+            int linha;
+            int coluna;
 
-            if (Jogador == "X")
-            {
-                jogador = 1;
-            }
-            else
-            {
-                jogador = 2;
-            }
-
-            bool Ocupado = true;
+            bool ocupado;
             do
             {
-                Console.WriteLine("Vez do " + jogador + "º jogador:");
+                Console.WriteLine();
+                Console.WriteLine("Vez do jogador " + nome);
                 Console.Write("Digite a linha: ");
-                Linha = int.Parse(Console.ReadLine());
+                linha = int.Parse(Console.ReadLine());
                 Console.Write("Digite a Coluna: ");
-                Coluna = int.Parse(Console.ReadLine());
+                coluna = int.Parse(Console.ReadLine());
 
-                Ocupado = VerificaPos((Linha - 1), (Coluna - 1), Matriz);
+                ocupado = VerificaPos((linha - 1), (coluna - 1), Matriz);
 
-                for (int l = 0; l < Matriz.Length; l++)
+                for (int l = 0; l < Matriz.GetLength(0); l++)
                 {
-                    for (int c = 0; c < Matriz.Length; c++)
+                    for (int c = 0; c < Matriz.GetLength(1); c++)
                     {
-                        if (!Ocupado && l == Linha && c == Coluna)
+                        if (!ocupado && l == linha && c == coluna)
                         {
-                            Matriz[Linha - 1, Coluna - 1] = Jogador;
+                            Matriz[linha - 1, coluna - 1] = Jogador;
                         }
                     }
                 }
-            } while (Ocupado);
+            } while (ocupado);
         }
+
         static bool VerificaPos(int linha, int coluna, string[,] Matriz)
         {
             if (Matriz[linha, coluna] == "-")
@@ -110,6 +107,7 @@ namespace ConsoleApp1
                 return true;
             }
         }
+
         static void ImprimirJogo(string[,] Matriz)
         {
             for (int l = 0; l < Matriz.GetLength(0); l++)
@@ -117,25 +115,38 @@ namespace ConsoleApp1
                 Console.WriteLine("\t");
                 for (int c = 0; c < Matriz.GetLength(1); c++)
                 {
-                    Console.Write("\t | " + Matriz[l, c] + " | ");
+                    if (c == 0)
+                    {
+                        Console.Write("\t  " + Matriz[l, c]);
+                    }
+                    else
+                    {
+                        Console.Write("  |  " + Matriz[l, c]);
+                    }
+                    
                 }
                 Console.WriteLine();
+                if (l<2)
+                {
+                    Console.Write("\t-----------------");
+                }
             }
         }
         static int VerificaStatus(string[,] Matriz, string Jogador)
         {
-            int jogador;
+            
             bool continuar = false;
             int diagonal1 = 0;
             int diagonal2 = 0;
 
+            int situacaoJogo;
             if (Jogador == "X")
             {
-                jogador = 1;
+                situacaoJogo = 1;
             }
             else
             {
-                jogador = 2;
+                situacaoJogo = 2;
             }
 
             //retorna ganhador coluna igual
@@ -151,7 +162,7 @@ namespace ConsoleApp1
                 }
                 if (contador == 3)
                 {
-                    return jogador;
+                    return situacaoJogo;
                 }
             }
             //retorna ganhador linha igual
@@ -167,7 +178,7 @@ namespace ConsoleApp1
                 }
                 if (contador == 3)
                 {
-                    return jogador;
+                    return situacaoJogo;
                 }
             }
 
@@ -182,7 +193,7 @@ namespace ConsoleApp1
 
                 if (diagonal1 == 3)
                 {
-                    return jogador;
+                    return situacaoJogo;
                 }
             }
 
@@ -196,7 +207,7 @@ namespace ConsoleApp1
 
                 if (diagonal2 == 3)
                 {
-                    return jogador;
+                    return situacaoJogo;
                 }
             }
 
