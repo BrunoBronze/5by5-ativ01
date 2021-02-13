@@ -11,6 +11,7 @@ namespace ConsoleApp1
             string Jogador2 = "O";
             int contador = 0;
             bool situacaoJogo = true;
+            int acabou;
 
             for (int l = 0; l < Matriz.GetLength(0); l++)
             {
@@ -25,13 +26,31 @@ namespace ConsoleApp1
                 if (contador % 2 == 0)
                 {
                     Inserir(Jogador1, Matriz);
+                    ImprimirJogo(Matriz);
+                    acabou = VerificaStatus(Matriz, Jogador1);
                 }
                 else
                 {
                     Inserir(Jogador2, Matriz);
+                    ImprimirJogo(Matriz);
+                    acabou = VerificaStatus(Matriz, Jogador1);
                 }
 
-                ImprimirJogo(Matriz);
+                if (acabou == 0)
+                {
+                    Console.WriteLine("Empatou !");
+                    situacaoJogo = false;
+                }
+                else if (acabou == 1)
+                {
+                    Console.WriteLine("Jogador 1 ganhou !");
+                    situacaoJogo = false;
+                }
+                else if (acabou == 2)
+                {
+                    Console.WriteLine("Jogador 2 ganhou !");
+                    situacaoJogo = false;
+                }
 
                 contador++;
             } while (situacaoJogo == true);
@@ -40,36 +59,39 @@ namespace ConsoleApp1
             Console.ReadKey();
         }
 
-        static void Inserir(string jogador, string[,] Matriz)
+        static void Inserir(string Jogador, string[,] Matriz)
         {
-            int[] vet = new int[2];
-
-            /*
-            String [] resp = new string [2];
-            Console.Write("Digite a linha e a coluna: " + (resp[0] = Console.ReadLine()) + ", " + (resp[1] = Console.ReadLine()));
-            vet[0] = int.Parse(resp[0]);
-            vet[1] = int.Parse(resp[1]);*/
-
             int Linha;
             int Coluna;
+            int jogador;
+
+            if (Jogador == "X")
+            {
+                jogador = 1;
+            }
+            else
+            {
+                jogador = 2;
+            }
 
             bool Ocupado = true;
             do
             {
+                Console.WriteLine("Vez do " + jogador + "º jogador:");
                 Console.Write("Digite a linha: ");
                 Linha = int.Parse(Console.ReadLine());
                 Console.Write("Digite a Coluna: ");
                 Coluna = int.Parse(Console.ReadLine());
 
                 Ocupado = VerificaPos((Linha - 1), (Coluna - 1), Matriz);
-                
+
                 for (int l = 0; l < Matriz.Length; l++)
                 {
                     for (int c = 0; c < Matriz.Length; c++)
                     {
-                        if (!Ocupado && l == vet[0] && c == vet[1])
+                        if (!Ocupado && l == Linha && c == Coluna)
                         {
-                            Matriz[Linha - 1, Coluna - 1] = jogador;
+                            Matriz[Linha - 1, Coluna - 1] = Jogador;
                         }
                     }
                 }
@@ -100,31 +122,104 @@ namespace ConsoleApp1
                 Console.WriteLine();
             }
         }
-        static void VerificaStatus(string [,] Matriz)
+        static int VerificaStatus(string[,] Matriz, string Jogador)
         {
+            int jogador;
+            bool continuar = false;
+            int diagonal1 = 0;
+            int diagonal2 = 0;
 
+            if (Jogador == "X")
+            {
+                jogador = 1;
+            }
+            else
+            {
+                jogador = 2;
+            }
+
+            //retorna ganhador coluna igual
+            for (int c = 0; c < Matriz.GetLength(1); c++)
+            {
+                int contador = 0;
+                for (int l = 0; l < Matriz.GetLength(0); l++)
+                {
+                    if (Matriz[l, c] == Jogador)
+                    {
+                        contador++;
+                    }
+                }
+                if (contador == 3)
+                {
+                    return jogador;
+                }
+            }
+            //retorna ganhador linha igual
+            for (int l = 0; l < Matriz.GetLength(0); l++)
+            {
+                int contador = 0;
+                for (int c = 0; c < Matriz.GetLength(1); c++)
+                {
+                    if (Matriz[l, c] == Jogador)
+                    {
+                        contador++;
+                    }
+                }
+                if (contador == 3)
+                {
+                    return jogador;
+                }
+            }
+
+            //retorna ganhador diagonal principal
+
+            for (int l = 0; l < Matriz.GetLength(0); l++)
+            {
+                if (Matriz[l, l] == Jogador)
+                {
+                    diagonal1++;
+                }
+
+                if (diagonal1 == 3)
+                {
+                    return jogador;
+                }
+            }
+
+            //retorna ganhador diagonal secundária
+            for (int l = 0, c = Matriz.GetLength(1)-1; l < Matriz.GetLength(0); l++, c--)
+            {
+                if (Matriz[l, c] == Jogador)
+                {
+                    diagonal2++;
+                }
+
+                if (diagonal2 == 3)
+                {
+                    return jogador;
+                }
+            }
+
+            //Verifica se há posições para continuar o jogo.
+            for (int l = 0; l < Matriz.GetLength(0); l++)
+            {
+                for (int c = 0; c < Matriz.GetLength(1); c++)
+                {
+                    if (Matriz[l, c] == "-")
+                    {
+                        continuar = true;
+                    }
+                }
+            }
+            //retorna se o jogo irá continuar ou se empatou !
+            if (!continuar)
+            {
+                return 0;
+            }
+            else
+            {
+                return 3;
+            }
         }
     }
 }
-
-/*	•Variaveis
-        1.string[3, 3] Matriz;
-        2.int Jogador1, Jogador2;
-            2.1.int Linha, Coluna;
-        3.bool situacaoJogo = true;
-    •Função ImprimirJogo()
-    {
-        
-    }    
-    •Função bool VerificaPos()
-    {
-        if(Pos=="Null")
-        return true;
-        else
-        return false;
-    }
-    •Função int VerificaStatus(string [,]Matriz)
-    {
-        return {0,1,2};
-    }
-*/
