@@ -11,10 +11,11 @@ namespace ConsoleApp1
             string jogador2 = "O";
             string nome1;
             string nome2;
-            int contador = 0;
             bool situacaoJogo = true;
+            int contador = 0;
             int acabou;
 
+            //Preenche a matriz com a String "-"
             for (int l = 0; l < matriz.GetLength(0); l++)
             {
                 for (int c = 0; c < matriz.GetLength(1); c++)
@@ -24,6 +25,8 @@ namespace ConsoleApp1
             }
 
             Console.WriteLine("\t   ########### JOGO DA VELHA ###########");
+            Console.WriteLine("\n");
+            //Pergunta os nomes dos jogadores, verifica se são iguais ou nulos.
             do
             {
                 Console.Write("Digite o nome do primeiro jogador: ");
@@ -47,9 +50,11 @@ namespace ConsoleApp1
                 }
             } while (nome1 == nome2 || nome1.Trim(' ') == "" || nome2.Trim(' ') == "");
 
-            
             ImprimirJogo(matriz);
+            Console.WriteLine("\nObs: Digite apenas números de 1 a 3");
 
+            //mantém o jogo rodando até a condição situacaoJogo mudar !
+            //contador usado para diferenciar o jogador 1 do jogador 2!
             do
             {
                 if (contador % 2 == 0)
@@ -87,7 +92,6 @@ namespace ConsoleApp1
                         situacaoJogo = false;
                     }
                 }
-
                 contador++;
             } while (situacaoJogo == true);
 
@@ -118,7 +122,11 @@ namespace ConsoleApp1
                 {
                     Console.WriteLine("Digite um número inteiro !");
                     ocupado = true;
-
+                }
+                catch (OverflowException)
+                {
+                    Console.WriteLine("Digite um número menor !");
+                    ocupado = true;
                 }
 
                 if (!ocupado)
@@ -145,7 +153,7 @@ namespace ConsoleApp1
                     return true;
                 }
             }
-            catch (Exception)
+            catch (IndexOutOfRangeException)
             {
                 Console.WriteLine("Digite um número entre 1 e 3 !");
                 return true;
@@ -178,10 +186,9 @@ namespace ConsoleApp1
         }
         static int VerificaStatus(string[,] matriz)
         {
-            string ganhador = "-";
+            string ganhador = "";
             bool ganhou = false;
-            bool andamento = false;
-
+            bool continuar = false;
 
             //Linha 1 ganhou {​​​​​​​0,0}​​​​​​​{​​​​​​​0,1}​​​​​​​{​​​​​​​0,2}​​​​​​​ 
             if (matriz[0, 0] != "-" && (matriz[0, 0] == matriz[0, 1]))
@@ -194,7 +201,7 @@ namespace ConsoleApp1
             }
 
             //Linha 2 ganhou {​​​​​​​1,0}​​​​​​​{​​​​​​​1,1}​​​​​​​{​​​​​​​1,2}
-            if (matriz[1, 0] != "-" && (matriz[1, 0] == matriz[1, 1]))
+            if (ganhou == false && matriz[1, 0] != "-" && (matriz[1, 0] == matriz[1, 1]))
             {
                 if (matriz[1, 1] == matriz[1, 2])
                 {
@@ -204,7 +211,7 @@ namespace ConsoleApp1
             }
 
             //Linha 3 ganhou {​​​​​​​2,0}​​​​​​​{​​​​​​​2,1}​​​​​​​{​​​​​​​2,2}
-            if (matriz[2, 0] != "-" && (matriz[2, 0] == matriz[2, 1]))
+            if (ganhou == false && matriz[2, 0] != "-" && (matriz[2, 0] == matriz[2, 1]))
             {
                 if (matriz[2, 1] == matriz[2, 2])
                 {
@@ -214,7 +221,7 @@ namespace ConsoleApp1
             }
 
             //Coluna 1 ganhou {​​​​​​​0,0}​​​​​​​{​​​​​​​1,0}​​​​​​​{​​​​​​​2,0}​​​​​​​
-            if (matriz[0, 0] != "-" && (matriz[0, 0] == matriz[1, 0]))
+            if (ganhou == false && matriz[0, 0] != "-" && (matriz[0, 0] == matriz[1, 0]))
             {
                 if (matriz[1, 0] == matriz[2, 0])
                 {
@@ -224,7 +231,7 @@ namespace ConsoleApp1
             }
 
             //Coluna 2 ganhou {​​​​​​​0,1}​​​​​​​{​​​​​​​1,1}​​​​​​​{​​​​​​​2,1}​​​​​​​
-            if (matriz[0, 1] != "-" && (matriz[0, 1] == matriz[1, 1]))
+            if (ganhou == false && matriz[0, 1] != "-" && (matriz[0, 1] == matriz[1, 1]))
             {
                 if (matriz[1, 1] == matriz[2, 1])
                 {
@@ -234,7 +241,7 @@ namespace ConsoleApp1
             }
 
             //Coluna 3 ganhou {​​​​​​​0,2}​​​​​​​{​​​​​​​1,2}​​​​​​​{​​​​​​​2,2}
-            if (matriz[0, 2] != "-" && (matriz[0, 2] == matriz[1, 2]))
+            if (ganhou == false && matriz[0, 2] != "-" && (matriz[0, 2] == matriz[1, 2]))
             {
                 if (matriz[1, 2] == matriz[2, 2])
                 {
@@ -244,7 +251,7 @@ namespace ConsoleApp1
             }
 
             //Diagonal principal {​​​​​​​0,0}​​​​​​​{​​​​​​​1,1}​​​​​​​{​​​​​​​2,2}​​​​​​​
-            if (matriz[0, 0] != "-" && (matriz[0, 0] == matriz[1, 1]))
+            if (ganhou == false && matriz[0, 0] != "-" && (matriz[0, 0] == matriz[1, 1]))
             {
                 if (matriz[1, 1] == matriz[2, 2])
                 {
@@ -254,7 +261,7 @@ namespace ConsoleApp1
             }
 
             //Diagonal principal {​​​​​​​0,2}​​​​​​​{​​​​​​​1,1}​​​​​​​{​​​​​​​2,0}​​​​​​​
-            if (matriz[0, 2] != "-" && (matriz[0, 2] == matriz[1, 1]))
+            if (ganhou == false && matriz[0, 2] != "-" && (matriz[0, 2] == matriz[1, 1]))
             {
                 if (matriz[1, 1] == matriz[2, 0])
                 {
@@ -276,16 +283,16 @@ namespace ConsoleApp1
                 }
             }
 
-            for (int l = 0; l < matriz.GetLength(0); l++)
+            for (int l = 0; l < matriz.GetLength(0) && continuar == false; l++)
             {
-                for (int c = 0; c < matriz.GetLength(1); c++)
+                for (int c = 0; c < matriz.GetLength(1) && continuar == false; c++)
                 {
                     if (matriz[l, c] == "-")
-                        andamento = true;
+                        continuar = true;
                 }
             }
 
-            if (andamento == true)
+            if (continuar == true)
             {
                 return 3;
             }
@@ -296,107 +303,3 @@ namespace ConsoleApp1
         }
     }
 }
-
-
-
-/*static int VerificaStatus(string[,] matriz)
-{
-    int situacaoJogo;
-    int diagonal1 = 0;
-    int diagonal2 = 0;
-    bool continuar = false;
-
-    if (jogador == "X")
-    {
-        situacaoJogo = 1;
-    }
-    else
-    {
-        situacaoJogo = 2;
-    }
-
-    //retorna ganhador coluna igual
-    for (int c = 0; c < matriz.GetLength(1); c++)
-    {
-        int contador = 0;
-        for (int l = 0; l < matriz.GetLength(0); l++)
-        {
-            if (matriz[l, c] == jogador)
-            {
-                contador++;
-            }
-        }
-        if (contador == 3)
-        {
-            return situacaoJogo;
-        }
-    }
-    //retorna ganhador linha igual
-    for (int l = 0; l < matriz.GetLength(0); l++)
-    {
-        int contador = 0;
-        for (int c = 0; c < matriz.GetLength(1); c++)
-        {
-            if (matriz[l, c] == jogador)
-            {
-                contador++;
-            }
-        }
-        if (contador == 3)
-        {
-            return situacaoJogo;
-        }
-    }
-
-    //retorna ganhador diagonal principal
-
-    for (int l = 0; l < matriz.GetLength(0); l++)
-    {
-        if (matriz[l, l] == jogador)
-        {
-            diagonal1++;
-        }
-
-        if (diagonal1 == 3)
-        {
-            return situacaoJogo;
-        }
-    }
-
-    //retorna ganhador diagonal secundária
-    for (int l = 0, c = matriz.GetLength(1) - 1; l < matriz.GetLength(0); l++, c--)
-    {
-        if (matriz[l, c] == jogador)
-        {
-            diagonal2++;
-        }
-
-        if (diagonal2 == 3)
-        {
-            return situacaoJogo;
-        }
-    }
-
-    //Verifica se há posições para continuar o jogo.
-    for (int l = 0; l < matriz.GetLength(0); l++)
-    {
-        for (int c = 0; c < matriz.GetLength(1); c++)
-        {
-            if (matriz[l, c] == "-")
-            {
-                continuar = true;
-            }
-        }
-    }
-    //retorna se o jogo irá continuar ou se empatou !
-    if (!continuar)
-    {
-        return 0;
-    }
-    else
-    {
-        return 3;
-    }
-}
-}
-}*/
