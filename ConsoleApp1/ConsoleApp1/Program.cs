@@ -50,27 +50,24 @@ namespace ConsoleApp1
                 }
             } while (nome1 == nome2 || nome1.Trim(' ') == "" || nome2.Trim(' ') == "");
 
-            ImprimirJogo(matriz);
+            Imprimir_Jogo(matriz);
             Console.WriteLine("\nObs: Digite apenas números de 1 a 3");
 
             //mantém o jogo rodando até a condição situacaoJogo mudar !
-            //contador usado para diferenciar o jogador 1 do jogador 2!
             do
             {
+                //contador usado para diferenciar a vez dos jogadores 1 e 2!
                 if (contador % 2 == 0)
                 {
-
                     Inserir(matriz, jogador1, nome1);
-                    Console.Clear();
-                    ImprimirJogo(matriz);
                 }
                 else
                 {
                     Inserir(matriz, jogador2, nome2);
-                    Console.Clear();
-                    ImprimirJogo(matriz);
-
                 }
+
+                Console.Clear();
+                Imprimir_Jogo(matriz);
 
                 if (contador > 3)
                 {
@@ -78,7 +75,7 @@ namespace ConsoleApp1
 
                     if (acabou == 0)
                     {
-                        Console.WriteLine("Empatou !");
+                        Console.WriteLine("Deu velha !");
                         situacaoJogo = false;
                     }
                     else if (acabou == 1)
@@ -125,7 +122,7 @@ namespace ConsoleApp1
                 }
                 catch (OverflowException)
                 {
-                    Console.WriteLine("Digite um número menor !");
+                    Console.WriteLine("Você digitou um número bem grande, digite um número entre 1 e 3 !");
                     ocupado = true;
                 }
 
@@ -160,7 +157,7 @@ namespace ConsoleApp1
             }
         }
 
-        static void ImprimirJogo(string[,] matriz)
+        static void Imprimir_Jogo(string[,] matriz)
         {
             for (int l = 0; l < matriz.GetLength(0); l++)
             {
@@ -183,6 +180,7 @@ namespace ConsoleApp1
                     Console.Write("\t\t-----------------");
                 }
             }
+            return;
         }
         static int VerificaStatus(string[,] matriz)
         {
