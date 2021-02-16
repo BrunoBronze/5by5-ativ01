@@ -1,0 +1,7 @@
+C:\temp\ws-c#\5by5-ativ01\JogoVelha2.0\JogoVelha2.0\bin\Debug\JogoVelha2.0.exe.config
+C:\temp\ws-c#\5by5-ativ01\JogoVelha2.0\JogoVelha2.0\bin\Debug\JogoVelha2.0.exe
+C:\temp\ws-c#\5by5-ativ01\JogoVelha2.0\JogoVelha2.0\bin\Debug\JogoVelha2.0.pdb
+C:\temp\ws-c#\5by5-ativ01\JogoVelha2.0\JogoVelha2.0\obj\Debug\JogoVelha2.0.csprojAssemblyReference.cache
+C:\temp\ws-c#\5by5-ativ01\JogoVelha2.0\JogoVelha2.0\obj\Debug\JogoVelha2.0.csproj.CoreCompileInputs.cache
+C:\temp\ws-c#\5by5-ativ01\JogoVelha2.0\JogoVelha2.0\obj\Debug\JogoVelha2.0.exe
+C:\temp\ws-c#\5by5-ativ01\JogoVelha2.0\JogoVelha2.0\obj\Debug\JogoVelha2.0.pdb
