@@ -1,0 +1,14 @@
+C:\temp\ws-c#\Exercice_Class1\Exercice_Class1\bin\Debug\Exercice_Class1.exe.config
+C:\temp\ws-c#\Exercice_Class1\Exercice_Class1\bin\Debug\Exercice_Class1.exe
+C:\temp\ws-c#\Exercice_Class1\Exercice_Class1\bin\Debug\Exercice_Class1.pdb
+C:\temp\ws-c#\Exercice_Class1\Exercice_Class1\obj\Debug\Exercice_Class1.csprojAssemblyReference.cache
+C:\temp\ws-c#\Exercice_Class1\Exercice_Class1\obj\Debug\Exercice_Class1.csproj.CoreCompileInputs.cache
+C:\temp\ws-c#\Exercice_Class1\Exercice_Class1\obj\Debug\Exercice_Class1.exe
+C:\temp\ws-c#\Exercice_Class1\Exercice_Class1\obj\Debug\Exercice_Class1.pdb
+C:\temp\ws-c#\5by5-ativ01\Exercice_Class1\Exercice_Class1\obj\Debug\Exercice_Class1.csprojAssemblyReference.cache
+C:\temp\ws-c#\5by5-ativ01\Exercice_Class1\Exercice_Class1\obj\Debug\Exercice_Class1.csproj.CoreCompileInputs.cache
+C:\temp\ws-c#\5by5-ativ01\Exercice_Class1\Exercice_Class1\obj\Debug\Exercice_Class1.exe
+C:\temp\ws-c#\5by5-ativ01\Exercice_Class1\Exercice_Class1\obj\Debug\Exercice_Class1.pdb
+C:\temp\ws-c#\5by5-ativ01\Exercice_Class1\Exercice_Class1\bin\Debug\Exercice_Class1.exe.config
+C:\temp\ws-c#\5by5-ativ01\Exercice_Class1\Exercice_Class1\bin\Debug\Exercice_Class1.exe
+C:\temp\ws-c#\5by5-ativ01\Exercice_Class1\Exercice_Class1\bin\Debug\Exercice_Class1.pdb

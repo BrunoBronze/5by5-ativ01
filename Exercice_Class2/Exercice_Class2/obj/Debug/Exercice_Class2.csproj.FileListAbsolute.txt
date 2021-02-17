@@ -1,0 +1,7 @@
+C:\temp\ws-c#\Exercice_Class2\Exercice_Class2\bin\Debug\Exercice_Class2.exe.config
+C:\temp\ws-c#\Exercice_Class2\Exercice_Class2\bin\Debug\Exercice_Class2.exe
+C:\temp\ws-c#\Exercice_Class2\Exercice_Class2\bin\Debug\Exercice_Class2.pdb
+C:\temp\ws-c#\Exercice_Class2\Exercice_Class2\obj\Debug\Exercice_Class2.csprojAssemblyReference.cache
+C:\temp\ws-c#\Exercice_Class2\Exercice_Class2\obj\Debug\Exercice_Class2.csproj.CoreCompileInputs.cache
+C:\temp\ws-c#\Exercice_Class2\Exercice_Class2\obj\Debug\Exercice_Class2.exe
+C:\temp\ws-c#\Exercice_Class2\Exercice_Class2\obj\Debug\Exercice_Class2.pdb
